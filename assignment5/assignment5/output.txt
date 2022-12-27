@@ -1,0 +1,269 @@
+Sat 12 Mar 2022 10:47:32 PM PST
+*** compiling with clang++ to create an executable called myprogram
+clang version 7.0.1-8+deb10u2 (tags/RELEASE_701/final)
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+transaction.cpp:27:41: warning: field 'FirstName' will be initialized after field 'ID' [-Wreorder]
+        Type{Type}, LastName{LastName}, FirstName{FirstName}, ID{ID}, SuccessRate{true} {}
+                                        ^
+1 warning generated.
+*** running clang-tidy using options from .clang-tidy
+LLVM (http://llvm.org/):
+  LLVM version 7.0.1
+  
+  Optimized build.
+  Default target: x86_64-pc-linux-gnu
+  Host CPU: skylake-avx512
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+/home/NETID/jchu5/ass5/bank.cpp:72:24: warning: Attempt to delete released memory [clang-analyzer-cplusplus.NewDelete]
+                delete NewAccount;
+                       ^
+/home/NETID/jchu5/ass5/bank.cpp:58:12: note: Assuming the condition is true
+    while (!Transaction.empty()) {
+           ^
+/home/NETID/jchu5/ass5/bank.cpp:58:5: note: Loop condition is true.  Entering loop body
+    while (!Transaction.empty()) {
+    ^
+/home/NETID/jchu5/ass5/bank.cpp:62:13: note: Assuming the condition is true
+        if (Temp.getType() == 'O') {
+            ^
+/home/NETID/jchu5/ass5/bank.cpp:62:9: note: Taking true branch
+        if (Temp.getType() == 'O') {
+        ^
+/home/NETID/jchu5/ass5/bank.cpp:63:32: note: Memory is allocated
+            auto *NewAccount = new Account(Temp.getFirstName(), Temp.getLastName(), Temp.getID());
+                               ^
+/home/NETID/jchu5/ass5/bank.cpp:64:17: note: Assuming the condition is true
+            if (NewAccount->getID() < 0 || NewAccount->getID() > 9999) {
+                ^
+/home/NETID/jchu5/ass5/bank.cpp:64:41: note: Left side of '||' is true
+            if (NewAccount->getID() < 0 || NewAccount->getID() > 9999) {
+                                        ^
+/home/NETID/jchu5/ass5/bank.cpp:67:17: note: Memory is released
+                delete NewAccount;
+                ^
+/home/NETID/jchu5/ass5/bank.cpp:69:17: note: Assuming the condition is true
+            if (!accounts.insert(NewAccount)) {
+                ^
+/home/NETID/jchu5/ass5/bank.cpp:69:13: note: Taking true branch
+            if (!accounts.insert(NewAccount)) {
+            ^
+/home/NETID/jchu5/ass5/bank.cpp:72:24: note: Attempt to delete released memory
+                delete NewAccount;
+                       ^
+*** running myprogram
+ERROR: Insufficient balance to withdraw 20000 from Cash Johnny Growth Index Fund
+Displaying Transaction History for Cash Johnny by fund.
+Money Market: $470
+          D 10010 542
+          W 10010 72
+Prime Money Market: $3042
+          D 10011 1542
+          D 10011 1500
+Long-Term Bond: $10442
+          D 10012 5442
+          D 10012 5000
+Short-Term Bond: $14540
+          D 10013 7540
+          D 10013 7000
+500 Index Fund: $0
+Capital Value Fund: $54
+          D 10015 54
+Growth Equity Fund: $15053
+          D 10016 7542
+          D 10016 7576
+          W 10016 65
+Growth Index Fund: $10931
+          D 10017 5442
+          D 10017 6543
+          W 10017 1000
+          T 10017 54 10015
+          W 10017 20000 (Failed)
+Value Fund: $0
+Value Stock Index: $0
+Displaying Transaction History for Williams Hank's 500 Index Fund: $10000
+          D 12534 10000
+Displaying Transaction History for Williams Hank by fund.
+Money Market: $10000
+          D 12530 10000
+Prime Money Market: $10000
+          D 12531 10000
+Long-Term Bond: $0
+          D 12532 10000
+          W 12532 10000
+Short-Term Bond: $5000
+          D 12533 10000
+          W 12533 5000
+500 Index Fund: $10000
+          D 12534 10000
+Capital Value Fund: $10000
+          D 12535 10000
+Growth Equity Fund: $10000
+          D 12536 10000
+Growth Index Fund: $10000
+          D 12537 10000
+Value Fund: $10000
+          D 12538 10000
+Value Stock Index: $10000
+          D 12539 10000
+ERROR: Could not find account 4356. Transfer cancelled
+ERROR: Account 9876 is already open. Transaction refused.
+
+Processing Done. Final Balances.
+Cash Johnny Account ID: 1001
+       Money Market: $470
+       Prime Money Market: $3042
+       Long-Term Bond: $10442
+       Short-Term Bond: $14540
+       500 Index Fund: $0
+       Capital Value Fund: $54
+       Growth Equity Fund: $15053
+       Growth Index Fund: $10931
+       Value Fund: $0
+       Value Stock Index: $0
+
+Williams Hank Account ID: 1253
+       Money Market: $10000
+       Prime Money Market: $10000
+       Long-Term Bond: $0
+       Short-Term Bond: $5000
+       500 Index Fund: $10000
+       Capital Value Fund: $10000
+       Growth Equity Fund: $10000
+       Growth Index Fund: $10000
+       Value Fund: $10000
+       Value Stock Index: $10000
+
+Nelson Willie Account ID: 9876
+       Money Market: $0
+       Prime Money Market: $0
+       Long-Term Bond: $0
+       Short-Term Bond: $0
+       500 Index Fund: $0
+       Capital Value Fund: $0
+       Growth Equity Fund: $0
+       Growth Index Fund: $0
+       Value Fund: $0
+       Value Stock Index: $0
+
+==213898== Memcheck, a memory error detector
+==213898== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==213898== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==213898== Command: ./myprogram
+==213898== 
+ERROR: Insufficient balance to withdraw 20000 from Cash Johnny Growth Index Fund
+Displaying Transaction History for Cash Johnny by fund.
+Money Market: $470
+          D 10010 542
+          W 10010 72
+Prime Money Market: $3042
+          D 10011 1542
+          D 10011 1500
+Long-Term Bond: $10442
+          D 10012 5442
+          D 10012 5000
+Short-Term Bond: $14540
+          D 10013 7540
+          D 10013 7000
+500 Index Fund: $0
+Capital Value Fund: $54
+          D 10015 54
+Growth Equity Fund: $15053
+          D 10016 7542
+          D 10016 7576
+          W 10016 65
+Growth Index Fund: $10931
+          D 10017 5442
+          D 10017 6543
+          W 10017 1000
+          T 10017 54 10015
+          W 10017 20000 (Failed)
+Value Fund: $0
+Value Stock Index: $0
+Displaying Transaction History for Williams Hank's 500 Index Fund: $10000
+          D 12534 10000
+Displaying Transaction History for Williams Hank by fund.
+Money Market: $10000
+          D 12530 10000
+Prime Money Market: $10000
+          D 12531 10000
+Long-Term Bond: $0
+          D 12532 10000
+          W 12532 10000
+Short-Term Bond: $5000
+          D 12533 10000
+          W 12533 5000
+500 Index Fund: $10000
+          D 12534 10000
+Capital Value Fund: $10000
+          D 12535 10000
+Growth Equity Fund: $10000
+          D 12536 10000
+Growth Index Fund: $10000
+          D 12537 10000
+Value Fund: $10000
+          D 12538 10000
+Value Stock Index: $10000
+          D 12539 10000
+ERROR: Could not find account 4356. Transfer cancelled
+ERROR: Account 9876 is already open. Transaction refused.
+
+Processing Done. Final Balances.
+Cash Johnny Account ID: 1001
+       Money Market: $470
+       Prime Money Market: $3042
+       Long-Term Bond: $10442
+       Short-Term Bond: $14540
+       500 Index Fund: $0
+       Capital Value Fund: $54
+       Growth Equity Fund: $15053
+       Growth Index Fund: $10931
+       Value Fund: $0
+       Value Stock Index: $0
+
+Williams Hank Account ID: 1253
+       Money Market: $10000
+       Prime Money Market: $10000
+       Long-Term Bond: $0
+       Short-Term Bond: $5000
+       500 Index Fund: $10000
+       Capital Value Fund: $10000
+       Growth Equity Fund: $10000
+       Growth Index Fund: $10000
+       Value Fund: $10000
+       Value Stock Index: $10000
+
+Nelson Willie Account ID: 9876
+       Money Market: $0
+       Prime Money Market: $0
+       Long-Term Bond: $0
+       Short-Term Bond: $0
+       500 Index Fund: $0
+       Capital Value Fund: $0
+       Growth Equity Fund: $0
+       Growth Index Fund: $0
+       Value Fund: $0
+       Value Stock Index: $0
+
+==213898== 
+==213898== HEAP SUMMARY:
+==213898==     in use at exit: 176 bytes in 2 blocks
+==213898==   total heap usage: 114 allocs, 112 frees, 102,247 bytes allocated
+==213898== 
+==213898== LEAK SUMMARY:
+==213898==    definitely lost: 176 bytes in 2 blocks
+==213898==    indirectly lost: 0 bytes in 0 blocks
+==213898==      possibly lost: 0 bytes in 0 blocks
+==213898==    still reachable: 0 bytes in 0 blocks
+==213898==         suppressed: 0 bytes in 0 blocks
+==213898== Rerun with --leak-check=full to see details of leaked memory
+==213898== 
+==213898== For counts of detected and suppressed errors, rerun with: -v
+==213898== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+*** cleaning up, deleting myprogram
+Sat 12 Mar 2022 10:47:43 PM PST
